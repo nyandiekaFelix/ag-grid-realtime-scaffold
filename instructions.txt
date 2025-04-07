@@ -1,0 +1,191 @@
+Role: You are a senior full-stack engineer specializing in React, AG Grid, and real-time systems.
+Goal: Build a Real-Time Metrics Grid with a WebSocket backend mock that streams live metric updates to a React frontend using AG Grid.
+
+🎯 System Overview
+
+Backend: Node.js WebSocket server that emits metric updates every N milliseconds
+
+Frontend: React + TypeScript + AG Grid that consumes the stream and updates rows efficiently
+
+Focus: Performance, clarity, real-time update correctness
+
+📡 Backend (WebSocket Mock)
+Tech
+
+Node.js
+
+ws package
+
+No database (in-memory state only)
+
+Responsibilities
+
+Maintain an in-memory list of metrics:
+
+id
+
+serviceName
+
+metricName
+
+value
+
+unit
+
+status
+
+updatedAt
+
+On client connect:
+
+Send full snapshot of all metrics
+
+Every 500–1000ms:
+
+Randomly update only a subset of metrics
+
+Recalculate status based on thresholds
+
+Send delta updates, not full snapshots
+
+Example Payloads
+// Initial snapshot
+{
+  "type": "INIT",
+  "data": Metric[]
+}
+
+// Incremental update
+{
+  "type": "UPDATE",
+  "data": Metric[]
+}
+
+Backend Project Structure
+server/
+ ├── index.ts
+ ├── metricsStore.ts
+ ├── metricsGenerator.ts
+ └── types.ts
+
+Backend Requirements
+
+Deterministic IDs per metric
+
+Stable update frequency
+
+Graceful client disconnect handling
+
+Clearly commented code explaining real-time decisions
+
+🖥 Frontend (React + AG Grid)
+Functional Requirements
+
+React + TypeScript
+
+AG Grid Community
+
+WebSocket connection to backend
+
+Display metrics in a grid:
+
+serviceName
+
+metricName
+
+value
+
+unit
+
+status
+
+updatedAt
+
+Efficient updates:
+
+Use getRowId
+
+Apply updates via api.applyTransaction({ update })
+
+Avoid resetting rowData on updates
+
+AG Grid Features to Enable
+
+animateRows
+
+enableCellChangeFlash
+
+Quick filter input
+
+Column sorting & resizing
+
+Pause / Resume stream button
+
+UX & Styling
+
+Status-based row styling:
+
+OK → green
+
+WARN → amber
+
+CRITICAL → red
+
+Flash value cell when it changes
+
+Relative timestamps (e.g. “3s ago”)
+
+Compact dashboard layout
+
+Dark-mode friendly styles
+
+🧩 Frontend Structure
+src/
+ ├── components/
+ │   ├── MetricsGrid.tsx
+ │   └── StatusCell.tsx
+ ├── hooks/
+ │   ├── useWebSocket.ts
+ │   └── useMetricsStream.ts
+ ├── utils/
+ │   └── formatTime.ts
+ ├── types.ts
+ └── App.tsx
+
+🧠 Engineering Constraints
+
+No unnecessary re-renders
+
+Memoized column definitions
+
+Clean WebSocket lifecycle management
+
+Defensive handling of malformed messages
+
+Comments explaining why, not just what
+
+🚀 Stretch Goals (Optional)
+
+Batch updates per frame
+
+Pin CRITICAL rows to top
+
+Persist column state
+
+Server-side throttling toggle
+
+Reconnect with exponential backoff
+
+📦 Deliverables
+
+Working frontend + backend
+
+Clear README explaining architecture
+
+Clean separation of concerns
+
+Code that looks production-ready
+
+🔥 Final Instruction to the AI Agent
+
+Explain every non-obvious AG Grid and WebSocket design choice inline as comments. Assume the reviewer is a senior engineer.
