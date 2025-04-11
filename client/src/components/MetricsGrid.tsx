@@ -1,9 +1,9 @@
 import { useMemo, useCallback } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, GridReadyEvent, ValueFormatterParams } from 'ag-grid-community';
+import type { ColDef, GridReadyEvent, ValueFormatterParams } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
-import { Metric } from '../types';
+import type { Metric } from '../types';
 import { StatusCell } from './StatusCell';
 import { useMetricsStream } from '../hooks/useMetricsStream';
 import { formatTimeAgo } from '../utils/formatTime';

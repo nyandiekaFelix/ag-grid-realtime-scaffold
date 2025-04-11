@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICellRendererParams } from 'ag-grid-community';
+import { type ICellRendererParams } from 'ag-grid-community';
 
 export const StatusCell = (params: ICellRendererParams) => {
   const status = params.value;
