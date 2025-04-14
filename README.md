@@ -2,7 +2,7 @@
 
 A real-time metrics monitoring dashboard built with React, AG Grid, and WebSocket. This application demonstrates efficient real-time data streaming and grid updates with minimal re-renders.
 
-## 🏗️ Architecture
+## Architecture
 
 ### Backend (Node.js + WebSocket)
 - **WebSocket Server**: Streams metric updates every 500ms
@@ -20,7 +20,7 @@ A real-time metrics monitoring dashboard built with React, AG Grid, and WebSocke
   - Automatic reconnection on disconnect
   - Relative timestamps ("3s ago")
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+
@@ -44,7 +44,7 @@ A real-time metrics monitoring dashboard built with React, AG Grid, and WebSocke
    ```
    Frontend will be available at `http://localhost:5173`
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── server/
@@ -70,7 +70,7 @@ A real-time metrics monitoring dashboard built with React, AG Grid, and WebSocke
 │   └── package.json
 ```
 
-## 🎯 Key Features
+## Key Features
 
 ### Backend
 - **Deterministic IDs**: Each metric has a stable ID for efficient updates
@@ -86,46 +86,7 @@ A real-time metrics monitoring dashboard built with React, AG Grid, and WebSocke
 - **Pause/Resume**: Control stream without disconnecting
 - **Auto-Reconnect**: Exponential backoff on connection loss
 
-## 🧠 Design Decisions
-
-### Why AG Grid Transactions?
-Using `applyTransaction({ update })` instead of setting `rowData` directly ensures:
-- Only changed rows re-render
-- Animations work correctly
-- Sorting/filtering state is preserved
-- Better performance with large datasets
-
-### Why Custom Hooks?
-- `useWebSocket`: Encapsulates connection lifecycle, reconnection logic
-- `useMetricsStream`: Bridges WebSocket messages to AG Grid updates
-- Clean separation allows easy testing and reuse
-
-### Why Random Walk vs Full Random?
-Random walk (value ± 10) creates more realistic metric behavior:
-- Values trend gradually
-- Status changes are less jarring
-- Better demonstrates flash animations
-
-## 🎨 Styling
-
-- **Dark Mode**: Default dark theme for reduced eye strain
-- **Status Colors**:
-  - 🟢 Green: OK status
-  - 🟡 Amber: WARN status
-  - 🔴 Red: CRITICAL status
-- **Tailwind CSS**: Utility-first styling for rapid development
-- **AG Grid Alpine Dark**: Professional grid theme
-
-## 📊 Metrics Simulated
-
-| Service | Metrics | Thresholds |
-|---------|---------|------------|
-| AuthService | CPU Usage, Memory Usage | CPU: 70%/90%, Memory: 800MB/950MB |
-| PaymentService | Transaction Latency, Failed Transactions | Latency: 500ms/1000ms, Failed: 10/20 |
-| Database | Active Connections, Query Duration | Connections: 300/450, Duration: 100ms/300ms |
-| Frontend | Page Load Time, Request Errors | Load: 1500ms/2500ms, Errors: 5/10 |
-
-## 🔧 Development
+## Development
 
 ### Backend Development
 ```bash
@@ -151,21 +112,3 @@ cd client
 npm run build
 npm run preview
 ```
-
-## 🚀 Future Enhancements
-
-- [ ] Batch updates per animation frame
-- [ ] Pin CRITICAL rows to top
-- [ ] Persist column state to localStorage
-- [ ] Server-side throttling toggle
-- [ ] Historical data charts
-- [ ] Alert notifications
-- [ ] Multi-tenant support
-
-## 📝 License
-
-MIT
-
----
-
-**Built with ❤️ using React, AG Grid, and WebSocket**
