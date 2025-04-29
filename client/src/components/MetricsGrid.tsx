@@ -1,12 +1,16 @@
 import { useMemo, useCallback } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import type { ColDef, GridReadyEvent, ValueFormatterParams } from 'ag-grid-community';
+import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 import type { Metric } from '../types';
 import { StatusCell } from './StatusCell';
 import { useMetricsStream } from '../hooks/useMetricsStream';
 import { formatTimeAgo } from '../utils/formatTime';
+
+// Register AG Grid modules (required for v31+)
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 interface MetricsGridProps {
   wsUrl: string;
@@ -60,8 +64,8 @@ export const MetricsGrid = ({ wsUrl }: MetricsGridProps) => {
   }, []);
 
   return (
-    <div className="flex flex-col h-full gap-4 p-4">
-      <div className="flex justify-between items-center">
+    <div className="flex flex-col h-screen p-4">
+      <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Real-Time System Metrics</h1>
         <div className="flex gap-2 items-center">
           <span className={`px-2 py-1 rounded text-sm ${isConnected ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
@@ -84,7 +88,7 @@ export const MetricsGrid = ({ wsUrl }: MetricsGridProps) => {
         </div>
       </div>
 
-      <div className="ag-theme-alpine-dark flex-grow w-full" style={{ height: '600px' }}>
+      <div className="ag-theme-alpine-dark" style={{ width: '100%', height: 'calc(100vh - 120px)' }}>
         <AgGridReact<Metric>
           rowData={rowData}
           columnDefs={colDefs}

@@ -3,7 +3,7 @@ import http from 'http';
 import { MetricsGenerator } from './metricsGenerator';
 import { WebSocketMessage } from './types';
 
-const PORT = 8080;
+const PORT = 8081;
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.end('WebSocket Metrics Server is running');

@@ -1,4 +1,3 @@
-import React from 'react';
 import { type ICellRendererParams } from 'ag-grid-community';
 
 export const StatusCell = (params: ICellRendererParams) => {

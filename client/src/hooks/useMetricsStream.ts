@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useWebSocket } from './useWebSocket';
 import type { Metric, WebSocketMessage } from '../types';
 import type { GridApi } from 'ag-grid-community';
 
 export const useMetricsStream = (url: string) => {
-  const { lastMessage, isConnected, close, connect } = useWebSocket(url);
+  const { lastMessage, isConnected, connect } = useWebSocket(url);
   const [gridApi, setGridApi] = useState<GridApi<Metric> | null>(null);
   const [isPaused, setIsPaused] = useState(false);
 
